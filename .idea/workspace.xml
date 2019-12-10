@@ -23,13 +23,19 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/3.plugin_database and_make_controllers/node_modules" />
+    <handled-path value="$PROJECT_DIR$/4.App_by_express_mongoose_hbs/node_modules" />
+  </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
       <path value="$PROJECT_DIR$/1.streams/package.json" />
       <path value="$PROJECT_DIR$/2.modules/package.json" />
+      <path value="$PROJECT_DIR$/3.plugin_database and_make_controllers/package.json" />
+      <path value="$PROJECT_DIR$/4.App_by_express_mongoose_hbs/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-4" />
     <option name="width" value="774" />
     <option name="height" value="728" />
@@ -76,11 +82,14 @@
       <workItem from="1575521999409" duration="666000" />
       <workItem from="1575702148982" duration="78000" />
       <workItem from="1575713121038" duration="36000" />
+      <workItem from="1575795847680" duration="154000" />
+      <workItem from="1575814036012" duration="29000" />
+      <workItem from="1575910401945" duration="587000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="780000" />
+    <option name="totallyTimeSpent" value="1550000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -96,10 +105,10 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
     </layout>
