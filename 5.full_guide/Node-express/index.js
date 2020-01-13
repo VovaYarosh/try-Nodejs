@@ -28,6 +28,8 @@ app.use('/card',cardRoutes)
 
 const PORT = process.env.PORT || 3000
 
+const url = 'mongodb+srv://VovaYarosh:qwerty1234@cluster0-9chaf.mongodb.net/test?retryWrites=true&w=majority'
+
 app.listen(PORT,()=>{ 
  console.log(`server is running on port ${PORT}`)
 })
