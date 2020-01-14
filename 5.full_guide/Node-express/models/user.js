@@ -16,6 +16,7 @@ const userSchema = new Schema({
                     type: Number,
                     required: true,
                     default:1
+                
                 },
                 courseId:{
                     type: Schema.Types.ObjectId,
@@ -50,7 +51,7 @@ userSchema.methods.addToCart = function(course){
 
 userSchema.methods.removeFromCart = function(id){
     let items = [...this.cart.items]
-    const idx = items.findIndex(c =>c.courseId.toString() !== id.toString())
+    const idx = items.findIndex(c =>c.courseId.toString() === id.toString())
 
     if(items[idx].count === 1){
         items = items.filter(c => c.courseId.toString() !== id.toString())
