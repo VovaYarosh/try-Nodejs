@@ -4,7 +4,7 @@ const router = Router()
 
 router.get('/', async (req,res) =>{
  try{
-    const orders = await Order.find({'user.user.Id': req.user._id})
+    const orders = await Order.find({'user.userId': req.user._id})
     .populate('user.userId')
 
 
@@ -42,7 +42,7 @@ router.post('/', async (req,res)=>{
             name: req.user.name,
             userId: req.user
         },
-        courses
+        courses: courses
     })
 
     await order.save()
