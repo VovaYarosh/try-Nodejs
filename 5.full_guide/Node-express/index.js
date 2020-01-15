@@ -24,16 +24,6 @@ app.engine('hbs',hbs.engine)
 app.set('view engine','hbs')
 app.set('views','views')
 
-app.use(async (req,res,next)=>{
-   try{
-    const user = await User.findById('5e1cd14aa56f552058c54498')
-    req.user = user
-    next()
-   }catch(e){
-    console.log(e);  
-   }
-})
-
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended:true}))
 app.use(session({
@@ -60,16 +50,16 @@ async function start(){
             useUnifiedTopology: true
         })
 
-        const candidate = await User.findOne()
-        if(!candidate){
-            const user = new User({
-                email:'vova@df.net',
-                name:'Vova',
-                cart:{items: []}
-            })
+        // const candidate = await User.findOne()
+        // if(!candidate){
+        //     const user = new User({
+        //         email:'vova@df.net',
+        //         name:'Vova',
+        //         cart:{items: []}
+        //     })
 
-            await user.save()
-        }
+        //     await user.save()
+        // }
 
         app.listen(PORT,()=>{ 
             console.log(`server is running on port ${PORT}`)
