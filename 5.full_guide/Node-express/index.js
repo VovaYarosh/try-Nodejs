@@ -15,8 +15,8 @@ const coursesRoutes = require('./routes/courses')
 const authRoutes = require('./routes/auth')
 const varMiddleware = require('./middleware/variables')
 const userMiddleware = require('./middleware/user')
+const keys = require('./keys')
 
-const MONGODB_URI = `mongodb+srv://VovaYarosh:qwerty1234@cluster0-9chaf.mongodb.net/shop`
 const app = express()
 
 const hbs = exphbs.create({
@@ -25,7 +25,7 @@ const hbs = exphbs.create({
 })
 const store = new  MongoStore({
     collection: "session",
-    uri: MONGODB_URI
+    uri: keys.MONGODB_URI
 
 })
 
@@ -36,7 +36,7 @@ app.set('views','views')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended:true}))
 app.use(session({
-    secret: 'some secret value',
+    secret: keys.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store
@@ -57,21 +57,10 @@ const PORT = process.env.PORT || 3000
 
 async function start(){
     try{
-        await mongoose.connect(MONGODB_URI,{
+        await mongoose.connect(keys.MONGODB_URI,{
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-
-        // const candidate = await User.findOne()
-        // if(!candidate){
-        //     const user = new User({
-        //         email:'vova@df.net',
-        //         name:'Vova',
-        //         cart:{items: []}
-        //     })
-
-        //     await user.save()
-        // }
 
         app.listen(PORT,()=>{ 
             console.log(`server is running on port ${PORT}`)
