@@ -92,6 +92,34 @@ router.get('/reset',(req,res)=>{
     })
 })
 
+router.get('/password/:token', async (req,res)=>{
+    if(!req.params.token){
+        return res.redirect('/auth/login')
+    }
+    try{
+        const user = await User.findOne({
+            resetToken: req.params.token,
+            resetTokenExp: {$gt: Date.now()}
+            })
+
+            if(!user){
+                return res.redirect('/auth/login')
+            } else{
+                res.render('auth/password',{
+                    title:"recovery access",
+                    error: req.flash('error'),
+                    userId: user._id.toString(),
+                    token:req.params.token
+                })
+            }               
+    }catch(e){
+        console.log(e)
+    }
+        
+        
+
+})
+
 router.post('/reset',  (req,res)=>{
     try{
       crypto.randomBytes(32, async (err,buffer)=>{
@@ -109,7 +137,7 @@ router.post('/reset',  (req,res)=>{
             await transporter.sendMail(resetEmail(candidate.email, token))
             res.redirect('/auth/login')
         }else{
-            req.flash('error','This email doesn\'t exists')
+            req.flash('error','This email doesnt exists')
             res.redirect('/auth/reset')
         }
 
