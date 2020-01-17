@@ -29,3 +29,8 @@ exports.registerValidators = [
     body('name').isLength({min:2}).withMessage('The name must be at least two symbols long')
     .trim()
 ]
+
+exports.courseValidators = [
+    body('title').isLength({min:3}).withMessage('title cant be less than 3 symbols').trim(),
+    body('img','Enter the correct image URL').isURL()
+]
