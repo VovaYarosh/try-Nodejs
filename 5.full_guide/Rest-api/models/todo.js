@@ -6,7 +6,7 @@ const sequelize = require('../utils/database')
 //тип вказується з бібліотеки секвалайз
 const todo = sequelize.define('Todo',{
     id:{
-        primarykey: true,
+        primaryKey: true,
         autoIncrement: true,
         allowNull: false,
         type: Sequelize.INTEGER
@@ -19,10 +19,10 @@ const todo = sequelize.define('Todo',{
         type: Sequelize.STRING,
         allowNull: false
     },
-    date:{
-        type:Sequelize.Date,
-        allowNull: false
-    }
+    // date:{
+    //     type:Sequelize.DATE,
+    //     allowNull: false
+    // }
 })
 
 module.exports = todo
