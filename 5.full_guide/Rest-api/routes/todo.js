@@ -19,11 +19,14 @@ router.get('/', async (req,res)=> {
 //створення нової задачі
 router.post('/',async (req,res)=>{
     try{
+        //метод create робить з початку білд і потім зразу авт. зберігає
+        //в метод  create парадаєм параметри які будем забирати з фронтенда
         const todo = await Todo.create({
             title: req.body.title,
             done: false
         })
         res.status(201).json({todo})
+        //цей стратус каже що обєкт був створений
     }catch(e){
         console.log(e)
         res.status(500).json({
@@ -51,14 +54,13 @@ router.put('/:id',async (req,res)=>{
 //потрібно зрозуміти яке туду ми буде видалятись,тому до шляху додаєьбся динамічний Айді
 router.delete('/:id',async (req,res)=>{
     try{
-        //метод create робить з початку білд і потім зразу авт. зберігає
-        //в метод  create парадаєм параметри які будем забирати з фронтенда
-        const todo = await Todo.create({
-            title: req.body.title,
-            done: false
+        const todos = await Todo.findAll({
+            where:{
+                id: +req.params.id
+            }
         })
-        res.status(201).json({todo})
-        //цей стратус каже що обєкт був створений
+        await todos[0].destroy()
+        res.status(204).json({})
     }catch(e){
         console.log(e)
         res.status(500).json({
