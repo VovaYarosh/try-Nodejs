@@ -14,7 +14,8 @@ app.use(express.json())
 
 app.use(graphqlHTTP({
     schema:schema,
-    rootValue:resolver
+    rootValue:resolver,
+    graphiql: true
 }))
 //даний мідлвер буде завжди іти перед запуском сервера
 //потрібно на кожний запит повертати один файл для цього викликається метод res.sendFile
