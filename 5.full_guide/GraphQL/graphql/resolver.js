@@ -1,3 +1,5 @@
+const Todo = require('../models/todo')
+
 const users = [
     {name:'Igor', age: 30, email: 'igor@mail.ua'},
     {name:'Olena',age:23, email: 'olena@mail.ua'}
@@ -25,5 +27,12 @@ module.exports = {
         }
         users.push(user)
         return user
+    },
+    async getTodos(){
+        try{
+            return await Todo.findAll()
+        }catch(e){
+            throw new Error('Fetch todos is not available')
+        }
     }
 }

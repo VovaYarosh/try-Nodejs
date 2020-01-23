@@ -9,14 +9,26 @@ new Vue({
       }
     },
     created(){
-      fetch('/api/todo',{
-        method: 'get'
+      const query = `
+        query{
+          getTodos{
+            id title done createdAt uodatedAt
+          }
+        }
+      `
+
+      fetch('/graphql',{
+        method: 'post',
+        headers: {
+          "Content-Type":"application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({query})
       })
       .then(res => res.json())
-      .then(todos =>{
-        console.log(todos)
+      .then( repsonse => {
+        this.todos = repsonse.data.getTodos
       })
-      .catch(e => console.log(e))
     },
     methods: {
       addTodo() {
