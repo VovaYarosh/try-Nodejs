@@ -33,4 +33,27 @@ app.get('/', function(req,res){
     );
 })
 
+app.get('/cat', function(req,res){
+    let catId = req.query.id; 
+    let cat = new Promise(function(resolve,reject){
+        con.query(
+            'SELECT * FROM category WHERE id='+catId,
+            function(error,result){
+                if(error) reject(err);
+                resolve(result)
+             });
+    });     
+    let goods = new Promise(function(resolve,reject){
+        con.query(
+            'SELECT * FROM goods WHERE category='+catId,
+            function(error,result){
+                if(error) reject(err);
+                resolve(result)
+             });
+    });
+    Promise.all([cat,goods]).then(function(value){
+        console.log(value[1])
+    })
+
+});
 
