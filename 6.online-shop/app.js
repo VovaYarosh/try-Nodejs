@@ -30,7 +30,6 @@ app.get('/', function (req, res) {
         goods[result[i]['id']] = result[i];
       }
       //console.log(goods);
-      console.log(JSON.parse(JSON.stringify(goods)));
       res.render('main', {
           foo: 'hello',
           bar: 7,
@@ -74,3 +73,10 @@ app.get('/goods', function(req,res){
     res.render('goods', {goods: JSON.parse(JSON.stringify(result))});
   });
 });
+
+app.post('/get-category-list',function(req,res){
+  con.query('SELECT id,category FROM category', function(err,result,fields){
+    if(err) throw err;
+    res.json(result);
+  });
+})
