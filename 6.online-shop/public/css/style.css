@@ -49,32 +49,32 @@
   min-height: 150px;
 }
 
-/* nav */
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>NAV>>>>>>>>>>>> */
 
-.site-nav{
+.site-nav {
   width: 300px;
-  min-width: 100hv;
+  min-height: 100vh;
   position: fixed;
-  left: -300;
+  left: -300px;
   top: 0;
-  z-index: 99999;
+  z-index: 999999;
   padding: 10px;
   transition: all ease 1s;
   color: #fff;
 }
 
-.close-button-div{
+.close-button-div {
   text-align: right;
 }
 
-.show-nav{
+.show-nav {
   position: relative;
 }
 
-ul.category-list{
+ul.category-list {
   list-style-type: disc;
 }
 
-ul.category-list a{
-  color:#424242
+ul.category-list a {
+  color: #424242;
 }
