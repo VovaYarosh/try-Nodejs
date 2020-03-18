@@ -1,6 +1,6 @@
 document.querySelector('#lite-shop-order').onsubmit = function(event){
     event.preventDefault();
-    let userName = document.querySelector('#username').value.trim()
+    let username = document.querySelector('#username').value.trim()
     let phone = document.querySelector('#phone').value.trim()
     let email = document.querySelector('#email').value.trim()
     let address = document.querySelector('#address').value.trim()
@@ -15,7 +15,7 @@ document.querySelector('#lite-shop-order').onsubmit = function(event){
         return false;
     }
 
-    if(userName == '' || phone == '' || email == '' || address == ''){
+    if(username == '' || phone == '' || email == '' || address == ''){
         Swal.fire({
             title: 'Warning',
             text: 'Fill all fields',
