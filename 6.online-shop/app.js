@@ -17,6 +17,8 @@ let con = mysql.createConnection({
   database: 'shop'
 });
 
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0
+
 app.listen(3000, function () {
   console.log('node express work on 3000');
 });
@@ -119,13 +121,32 @@ app.post('/finish-order', function(req,res){
       'SELECT id,name,cost FROM goods WHERE id IN (' + key.join(',') + ')', 
       function (error, result, fields) {
       if (error) throw error;
-      sendMail(req.body,result).catch(console.error)
+      sendMail(req.body,result).catch(console.error);
+      saveOrder(req.body,result)
       res.send('1')
       });
   }else{
     res.send('0')
   }
 })
+
+function saveOrder(data,result){
+  let sql;
+  sql = "INSERT INTO user_info(user_name,user_phone,user_email,address) VALUES ('"+data.username+"','"+data.phone+"','"+data.email+"','"+data.address+"')"
+  con.query(sql,function(error,result2){
+    if(error)throw error
+    console.log('1 user info saved!')
+    let userId = result2.insertId
+    date = new Date()/1000;
+    for(let i = 0; i < result.length; i++){
+      sql = "INSERT INTO shop_order(date, user_id, goods_id,goods_cost,goods_amount, total) VALUES ("+date+","+userId+"," +result[i]['id']+","+result[i]['cost']+","+data.key[result[i]['id']]+","+data.key[result[i]['id']]*result[i]['cost']+")"
+      con.query(sql,function(error,result){
+        if(error) throw error
+        console.log('1 goods saved')
+      })
+    }
+  })
+}
 
 async function sendMail(data,result){
   let res = '<h2>Order in a lite shop';
