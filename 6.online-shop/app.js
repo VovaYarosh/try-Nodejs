@@ -8,6 +8,9 @@ app.set('view engine', 'pug');
 let mysql = require('mysql');
 
 app.use(express.json());
+
+app.use(express.urlencoded())
+
 const nodemailer = require('nodemailer')
 
 let con = mysql.createConnection({
@@ -158,6 +161,33 @@ app.get('/admin-order', function (req, res) {
   });
 });
 
+app.get('/login', function (req, res) {
+  res.render('login', {});
+})
+
+app.post('/login', function (req, res) {
+
+  con.query(
+    'SELECT * FROM user WHERE login="' + req.body.login+'" and password="'+req.body.password+'"',
+    function (error, result) {
+      console.log(result.length)
+      if (error) reject(error);
+      if(result == 0){
+        console.log('error user not found')
+        res.redirect('/login')
+      }else{
+        result = JSON.parse(JSON.stringify(result));
+        res.cookie('hash','blablabla')
+
+        let sql
+        sql = "UPDATE  user SET hash='blablabla' WHERE id="+result[0]['id'];
+        con.query(sql, function(error,resultQ){
+          if (error) throw error;
+          res.redirect('/admin')
+        })
+      }
+    });
+});
 
 function saveOrder(data,result){
   let sql;
