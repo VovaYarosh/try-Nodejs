@@ -1,5 +1,8 @@
 let express = require('express');
 let app = express();
+let cookieParser = require('cookie-parser')
+
+let admin = require('./admin')
 
 app.use(express.static('public'));
 
@@ -8,8 +11,8 @@ app.set('view engine', 'pug');
 let mysql = require('mysql');
 
 app.use(express.json());
-
 app.use(express.urlencoded())
+app.use(cookieParser())
 
 const nodemailer = require('nodemailer')
 
@@ -25,6 +28,15 @@ process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0
 app.listen(3000, function () {
   console.log('node express work on 3000');
 });
+
+app.use(function(req,res,next){
+  if(req.originalUrl == '/admin' || req.originalUrl == '/admin-order'){
+    admin(req,res,con,next)
+  }else{
+    next()
+  }
+})
+
 
 app.get('/', function (req, res) {
   let cat = new Promise(function (resolve, reject) {
@@ -135,11 +147,11 @@ app.post('/finish-order', function(req,res){
 
 
 app.get('/admin', function (req, res) {
-    res.render('admin', {});
+      res.render('admin',{})
 });
 
 app.get('/admin-order', function (req, res) {
-  con.query(`SELECT
+    con.query(`SELECT
   shop_order.id as id,
   shop_order.user_id as user_id,
   shop_order.goods_id as goods_id,
@@ -159,7 +171,7 @@ app.get('/admin-order', function (req, res) {
     if (error) throw error;
     res.render('admin-order', { order: JSON.parse(JSON.stringify(result)) });
   });
-});
+  })
 
 app.get('/login', function (req, res) {
   res.render('login', {});
@@ -177,10 +189,10 @@ app.post('/login', function (req, res) {
         res.redirect('/login')
       }else{
         result = JSON.parse(JSON.stringify(result));
-        res.cookie('hash','blablabla')
-
-        let sql
-        sql = "UPDATE  user SET hash='blablabla' WHERE id="+result[0]['id'];
+        let hash = makeHash(16)
+        res.cookie('hash', hash)
+        res.cookie('id',result[0]['id'])
+        sql = "UPDATE  user SET hash='"+ hash +"'WHERE id="+result[0]['id'];
         con.query(sql, function(error,resultQ){
           if (error) throw error;
           res.redirect('/admin')
@@ -245,4 +257,15 @@ async function sendMail(data,result){
   console.log("MessageSent: %s", info.messageId)
   console.log("PreviewSent: %s", nodemailer.getTestMessageUrl(info))
   return true;
+}
+
+
+function makeHash(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 }
