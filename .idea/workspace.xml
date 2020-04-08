@@ -26,6 +26,8 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/3.plugin_database and_make_controllers/node_modules" />
     <handled-path value="$PROJECT_DIR$/4.App_by_express_mongoose_hbs/node_modules" />
+    <handled-path value="$PROJECT_DIR$/5.full_guide/Node-express/node_modules" />
+    <handled-path value="$PROJECT_DIR$/5.full_guide/theory/node_modules" />
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
@@ -33,6 +35,8 @@
       <path value="$PROJECT_DIR$/2.modules/package.json" />
       <path value="$PROJECT_DIR$/3.plugin_database and_make_controllers/package.json" />
       <path value="$PROJECT_DIR$/4.App_by_express_mongoose_hbs/package.json" />
+      <path value="$PROJECT_DIR$/5.full_guide/Node-express/package.json" />
+      <path value="$PROJECT_DIR$/5.full_guide/theory/package.json" />
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
@@ -86,11 +90,13 @@
       <workItem from="1575814036012" duration="29000" />
       <workItem from="1575910401945" duration="774000" />
       <workItem from="1577902041472" duration="54000" />
+      <workItem from="1578841507790" duration="135000" />
+      <workItem from="1578910941941" duration="145000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1791000" />
+    <option name="totallyTimeSpent" value="2071000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
